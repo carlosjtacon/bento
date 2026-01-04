@@ -1,0 +1,9 @@
+{
+  "actions" : {
+    "run" : {
+      "enabled" : true,
+      "script" : "python3 bento.py preview test_data"
+    }
+  },
+  "openLogOnRun" : "start"
+}
