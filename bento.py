@@ -47,17 +47,22 @@ for root, dirs, files in path.walk(on_error=print):
 			shutil.make_archive(zipdir, 'zip', zipdir)
 			gitrepos.append(zipdir)
 	
-	if len(files) > 1000:
+	if (len(files) + len(dirs)) > 1000:
 		print('Warning: Folder', root, 'has too many files')
 	
-	root_clean = clean_name(root)
-	if root.name != root_clean:
-		print('Folder', root, 'is not good / Should be', root_clean)
-		if mode == 2:
-			newpath = root.parent / root_clean
-			print('Renaming', root, 'to', newpath)
-			root.rename(newpath)
-			root = newpath
+	for i, dir in enumerate(dirs):
+		dirpath = root / dir
+		dir_clean = clean_name(dirpath)
+		if dirpath.name != dir_clean:
+			print('Folder', dirpath, 'is not good / Should be', dir_clean)
+			newpath = dirpath.parent / dir_clean
+			if newpath.exists():
+				print('Error', newpath, 'already exists')
+			if mode == 2:
+				print('Renaming', dirpath, 'to', newpath)
+				dirpath.rename(newpath)
+				dirpath = newpath
+		dirs[i] = dirpath.name
 		
 	for file in files:
 		filepath = root / file
