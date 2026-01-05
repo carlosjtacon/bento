@@ -47,8 +47,9 @@ for root, dirs, files in path.walk(on_error=print):
 			shutil.make_archive(zipdir, 'zip', zipdir)
 			gitrepos.append(zipdir)
 	
-	if (len(files) + len(dirs)) > 1000:
-		print('Warning: Folder', root, 'has too many files')
+	numfiles = len(files) + len(dirs)
+	if numfiles > 3000:
+		print('Warning: Folder', root, 'has too many files ({})'.format(numfiles))
 	
 	for i, dir in enumerate(dirs):
 		dirpath = root / dir
