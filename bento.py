@@ -3,6 +3,10 @@ import pathlib
 import shutil
 import unicodedata
 import re
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 
 def exit():
 	print('Usage: bento.py [preview|rename|gitarchive] [/path/to/folder] [options: ascii]')
