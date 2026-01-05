@@ -2,6 +2,8 @@ import sys
 import pathlib
 import shutil
 import unicodedata
+import re
+
 
 def exit():
 	print('Usage: bento.py [preview|rename|gitarchive] [/path/to/folder] [options: ascii]')
@@ -14,6 +16,8 @@ def unidecode(s):
 
 def clean_name(path):
 	new_name = path.stem.rstrip() + path.suffix
+	new_name = re.sub(' +', ' ', new_name)
+	
 	if 'ascii' in sys.argv:
 		new_name = unidecode(new_name)
 	
